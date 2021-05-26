@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "165972941008",
+    "project_id": "innpresa-2c91d",
+    "storage_bucket": "innpresa-2c91d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165972941008:android:e19eb6980a4f76248ba6d5",
+        "android_client_info": {
+          "package_name": "com.example.innpresa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165972941008-uth4hdoumrukvmm0h55cughadmqaskgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7S89klESy_ky64s_hmqVrEVPVNmKFOSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165972941008-uth4hdoumrukvmm0h55cughadmqaskgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
