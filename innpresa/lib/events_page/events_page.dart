@@ -29,7 +29,7 @@ class _EventsPageState extends State<EventsPage> {
           ),
         ),
         body: FutureBuilder<QuerySnapshot>(
-          future: Firestore.instance.collection("events").getDocuments(),
+          future: Firestore.instance.collection("eventos").getDocuments(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(
@@ -43,7 +43,12 @@ class _EventsPageState extends State<EventsPage> {
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
                         return EventTile(snapshot.data.documents[index]);
-                      })
+                      }),
+                  ListView.builder(
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        return EventTile(snapshot.data.documents[index]);
+                      }),
                 ],
               );
           },
