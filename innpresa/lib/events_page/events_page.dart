@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:innpresa/tiles/event_tile.dart';
 
 class EventsPage extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class _EventsPageState extends State<EventsPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Seus Eventos"),
+          title: Text("Eventos"),
           centerTitle: true,
           bottom: TabBar(
             indicatorColor: Colors.amber,
@@ -26,10 +28,26 @@ class _EventsPageState extends State<EventsPage> {
             ],
           ),
         ),
-        //body: TabBarView(
-        //physics: NeverScrollableScrollPhysics(),
-        //children: [],
-        //),
+        body: FutureBuilder<QuerySnapshot>(
+          future: Firestore.instance.collection("events").getDocuments(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            else
+              return TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  ListView.builder(
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        return EventTile(snapshot.data.documents[index]);
+                      })
+                ],
+              );
+          },
+        ),
       ),
     );
   }
