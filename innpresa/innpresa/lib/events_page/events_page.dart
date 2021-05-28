@@ -17,6 +17,11 @@ class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add_rounded, size: 30),
+        backgroundColor: Color(0xff29404E),
+      ),
       body: ChangeNotifierProvider<AppState>(
         create: (_) => AppState(),
         child: Stack(
@@ -30,14 +35,14 @@ class _EventsPageState extends State<EventsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32.0),
+                      padding: EdgeInsets.fromLTRB(32.0, 10.0, 32.0, 0),
                       child: Row(
                         children: [
                           Text(
                             "InnPresa",
                             style: TextStyle(
                                 fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 color: Colors.white),
                           ),
                           Spacer(),
@@ -58,7 +63,7 @@ class _EventsPageState extends State<EventsPage> {
                               color: Colors.white)),
                     ),
                     Padding(
-                        padding: EdgeInsets.symmetric(vertical: 24.0),
+                        padding: EdgeInsets.fromLTRB(32.0, 24.0, 10.0, 12.0),
                         child: Consumer<AppState>(
                           builder: (context, appState, _) =>
                               SingleChildScrollView(
