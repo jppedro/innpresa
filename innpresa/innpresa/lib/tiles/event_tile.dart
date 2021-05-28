@@ -9,7 +9,7 @@ class EventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return /*Card(
       elevation: 4,
       color: Colors.white,
       child: Padding(
@@ -25,6 +25,11 @@ class EventTile extends StatelessWidget {
           ],
         ),
       ),
+    );*/
+        Container(
+      color: Colors.black,
+      height: 10,
+      width: 10,
     );
   }
 }

@@ -22,90 +22,91 @@ class _EventsPageState extends State<EventsPage> {
         child: Icon(Icons.add_rounded, size: 30),
         backgroundColor: Color(0xff29404E),
       ),
-      body: ChangeNotifierProvider<AppState>(
+      body:
+          /*ChangeNotifierProvider<AppState>(
         create: (_) => AppState(),
-        child: Stack(
-          children: [
-            EventsPageBackground(
-              screenHeight: MediaQuery.of(context).size.height,
-            ),
-            SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(32.0, 10.0, 32.0, 0),
+        child: */
+          Stack(
+        children: [
+          EventsPageBackground(
+            screenHeight: MediaQuery.of(context).size.height,
+          ),
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(32.0, 10.0, 32.0, 0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "InnPresa",
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.person_outline,
+                          color: Colors.white60,
+                          size: 30,
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 32.0),
+                    child: Text("Eventos",
+                        style: TextStyle(
+                            fontSize: 40.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(32.0, 24.0, 10.0, 12.0),
+                    /*child: Consumer<AppState>(
+                          builder: (context, appState, _) =>*/
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          Text(
-                            "InnPresa",
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white),
-                          ),
-                          Spacer(),
-                          Icon(
-                            Icons.person_outline,
-                            color: Colors.white60,
-                            size: 30,
-                          )
+                          for (final category in categories)
+                            CategoryWidget(category: category)
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32.0),
-                      child: Text("Eventos",
-                          style: TextStyle(
-                              fontSize: 40.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(32.0, 24.0, 10.0, 12.0),
-                        child: Consumer<AppState>(
-                          builder: (context, appState, _) =>
-                              SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                for (final category in categories)
-                                  CategoryWidget(category: category)
-                              ],
-                            ),
-                          ),
-                        )),
-                    Consumer<AppState>(
-                      builder: (context, appState, _) => Column(
-                        children: [
-                          FutureBuilder<QuerySnapshot>(
-                              future: Firestore.instance
-                                  .collection("eventos")
-                                  .getDocuments(),
-                              builder: (context, snapshot) {
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else
-                                  return ListView.builder(
-                                      itemCount: snapshot.data.documents.length,
-                                      itemBuilder: (context, index) {
-                                        return EventTile(
-                                            snapshot:
-                                                snapshot.data.documents[index]);
-                                      });
-                              })
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  /*Consumer<AppState>(
+                      builder: (context, appState, _) => */
+                  /*Column(
+                    children: [*/
+                  FutureBuilder<QuerySnapshot>(
+                      future: Firestore.instance
+                          .collection("eventos")
+                          .getDocuments(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData)
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        else
+                          return ListView.builder(
+                              padding: EdgeInsets.all(4.0),
+                              itemCount: snapshot.data.documents.length,
+                              itemBuilder: (context, index) {
+                                return EventTile(
+                                    snapshot: snapshot.data.documents[index]);
+                              });
+                      })
+                  //],
+                  //),
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

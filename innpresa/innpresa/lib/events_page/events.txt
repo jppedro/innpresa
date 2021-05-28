@@ -1,0 +1,46 @@
+DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Eventos"),
+          centerTitle: true,
+          bottom: TabBar(
+            indicatorColor: Colors.amber,
+            tabs: [
+              Tab(
+                icon: Icon(Icons.grid_off),
+              ),
+              Tab(
+                icon: Icon(Icons.list),
+              )
+            ],
+          ),
+        ),
+        body: FutureBuilder<QuerySnapshot>(
+          future: Firestore.instance.collection("eventos").getDocuments(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            else
+              return TabBarView(
+                children: [
+                  ListView.builder(
+                      padding: EdgeInsets.all(4.0),
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        return EventTile(snapshot.data.documents[index]);
+                      }),
+                  ListView.builder(
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        return EventTile(snapshot.data.documents[index]);
+                      }),
+                ],
+              );
+          },
+        ),
+        backgroundColor: Color.fromARGB(255, 38, 54, 64),
+      ),
+    );

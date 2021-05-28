@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 
 class AppState extends ChangeNotifier {
   int selectedCategoryId = 0;
@@ -7,4 +7,4 @@ class AppState extends ChangeNotifier {
     this.selectedCategoryId = selectedCategoryId;
     notifyListeners();
   }
-}
+}*/

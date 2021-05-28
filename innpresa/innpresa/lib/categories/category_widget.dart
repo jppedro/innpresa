@@ -5,21 +5,25 @@ import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 
-class CategoryWidget extends StatelessWidget {
+class CategoryWidget extends StatefulWidget {
   final Category category;
 
   const CategoryWidget({Key key, this.category}) : super(key: key);
+  @override
+  _CategoryWidgetState createState() => _CategoryWidgetState();
+}
 
+class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
-    final isSelected = appState.selectedCategoryId == category.categoryId;
+    //final appState = Provider.of<AppState>(context);
+    var isSelected = false;
 
     return GestureDetector(
       onTap: () {
-        if (!isSelected) {
-          appState.updateCategoryId(category.categoryId);
-        }
+        setState(() {
+          isSelected = true;
+        });
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 8),
@@ -35,7 +39,7 @@ class CategoryWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Icon(
-              category.icon,
+              this.widget.category.icon,
               color: isSelected ? Theme.of(context).primaryColor : Colors.white,
               size: 40,
             ),
@@ -43,7 +47,7 @@ class CategoryWidget extends StatelessWidget {
               height: 10,
             ),
             Text(
-              category.name,
+              this.widget.category.name,
               style: isSelected ? selectedCategoryTextStyle : categoryTextStyle,
             )
           ],
