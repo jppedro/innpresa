@@ -28,8 +28,8 @@ class EventTile extends StatelessWidget {
     );*/
         Container(
       color: Colors.black,
-      height: 10,
-      width: 10,
+      height: 50,
+      width: 50,
     );
   }
 }

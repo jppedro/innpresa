@@ -13,6 +13,7 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
+  int idSelected = 0;
   String title;
   @override
   Widget build(BuildContext context) {
@@ -64,24 +65,36 @@ class _EventsPageState extends State<EventsPage> {
                             fontWeight: FontWeight.bold,
                             color: Colors.white)),
                   ),
+                  SizedBox(
+                    height: 40,
+                  ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(32.0, 24.0, 10.0, 12.0),
+                    padding: EdgeInsets.fromLTRB(0.0, 24.0, 10.0, 12.0),
                     /*child: Consumer<AppState>(
-                          builder: (context, appState, _) =>*/
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          for (final category in categories)
-                            CategoryWidget(category: category)
-                        ],
-                      ),
+                              builder: (context, appState, _) =>*/
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        for (final category in categories)
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                idSelected = category.categoryId;
+                              });
+                              debugPrint(category.categoryId.toString());
+                            },
+                            child: CategoryWidget(
+                              category: category,
+                              isSelected: idSelected == category.categoryId,
+                            ),
+                          )
+                      ],
                     ),
                   ),
                   /*Consumer<AppState>(
-                      builder: (context, appState, _) => */
-                  /*Column(
-                    children: [*/
+                          builder: (context, appState, _) => */
+                  //Column(
+                  //children: [
                   FutureBuilder<QuerySnapshot>(
                       future: Firestore.instance
                           .collection("eventos")
@@ -92,14 +105,13 @@ class _EventsPageState extends State<EventsPage> {
                             child: CircularProgressIndicator(),
                           );
                         else
-                          return ListView.builder(
-                              padding: EdgeInsets.all(4.0),
-                              itemCount: snapshot.data.documents.length,
-                              itemBuilder: (context, index) {
-                                return EventTile(
-                                    snapshot: snapshot.data.documents[index]);
-                              });
-                      })
+                          return Column(
+                              children: List.generate(
+                                  snapshot.data.documents.length,
+                                  (index) => EventTile(
+                                      snapshot:
+                                          snapshot.data.documents[index])));
+                      }),
                   //],
                   //),
                 ],
@@ -111,3 +123,16 @@ class _EventsPageState extends State<EventsPage> {
     );
   }
 }
+/*else
+                          return ListView(
+                            children: [
+                              ListView.builder(
+                                  padding: EdgeInsets.all(4.0),
+                                  itemCount: snapshot.data.documents.length,
+                                  itemBuilder: (context, index) {
+                                    return EventTile(
+                                        snapshot:
+                                            snapshot.data.documents[index]);
+                                  }),
+                            ],
+                          );*/
