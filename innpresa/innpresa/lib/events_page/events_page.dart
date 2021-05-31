@@ -81,7 +81,6 @@ class _EventsPageState extends State<EventsPage> {
                               setState(() {
                                 idSelected = category.categoryId;
                               });
-                              debugPrint(category.categoryId.toString());
                             },
                             child: CategoryWidget(
                               category: category,
