@@ -95,6 +95,9 @@ class _EventsPageState extends State<EventsPage> {
                           builder: (context, appState, _) => */
                   //Column(
                   //children: [
+                  SizedBox(
+                    height: 25,
+                  ),
                   FutureBuilder<QuerySnapshot>(
                       future: Firestore.instance
                           .collection("eventos")
@@ -108,9 +111,13 @@ class _EventsPageState extends State<EventsPage> {
                           return Column(
                               children: List.generate(
                                   snapshot.data.documents.length,
-                                  (index) => EventTile(
-                                      snapshot:
-                                          snapshot.data.documents[index])));
+                                  (index) => Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20.0),
+                                        child: EventTile(
+                                            snapshot:
+                                                snapshot.data.documents[index]),
+                                      )));
                       }),
                   //],
                   //),
