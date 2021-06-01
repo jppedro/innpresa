@@ -1,5 +1,5 @@
-import 'package:pet_pipoca/models/pet_model.dart';
-import 'package:pet_pipoca/utils/db_util.dart';
+import 'package:innpresa/models/evento_model.dart';
+import 'package:innpresa/utils/db_util.dart';
 
 class EventoService {
   List<Evento> _petList = [];
