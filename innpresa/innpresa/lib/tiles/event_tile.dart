@@ -77,13 +77,31 @@ class EventTile extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Text(
-                        snapshot.data["hora"],
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            color: Color(0xFF000000),
-                            fontWeight: FontWeight.w900),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(snapshot.data["dia"],
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(0xFF000000),
+                                  fontWeight: FontWeight.w900)),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.watch_later_outlined, size: 20),
+                              Text(
+                                snapshot.data["hora"],
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Color(0xFF000000),
+                                    fontWeight: FontWeight.w900),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],

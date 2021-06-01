@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:innpresa/events_page/events_page.dart';
 import 'package:innpresa/models/evento_model.dart';
-import 'package:innpresA/services/evento_service.dart';
-import '../home/home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FormEvento extends StatefulWidget {
   String id;
@@ -22,7 +22,7 @@ class _FormEventoState extends State<FormEvento> {
   final _timesController = TextEditingController();
   final _imagemController = TextEditingController();
 
-  EventoService service = new EventoService();
+  /*EventoService service = new EventoService();
 
   Evento evento;
 
@@ -48,14 +48,12 @@ class _FormEventoState extends State<FormEvento> {
   void _getEvento(String id) {
     evento = service.getEventoService(id);
     print(evento.tipoDeEvento);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: Text(
-                evento != null ? "Edição do Evento" : "Cadastro do Evento")),
+        appBar: AppBar(title: Text("Cadastro de Evento")),
         body: SingleChildScrollView(
             child: Padding(
           padding: EdgeInsets.all(10),
@@ -93,6 +91,10 @@ class _FormEventoState extends State<FormEvento> {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: "Hora")),
             TextFormField(
+                controller: _localController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(labelText: "Local")),
+            TextFormField(
                 controller: _departamentosController,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: "Departamentos")),
@@ -115,6 +117,15 @@ class _FormEventoState extends State<FormEvento> {
                   width: double.infinity,
                   child: RaisedButton(
                     onPressed: () {
+                      Firestore.instance.collection("eventos").add({
+                        'dia': _diaController.text,
+                        'hora': _horaController.text,
+                        'idOrganizador': 1,
+                        'image': _imagemController.text,
+                        'local': _localController.text,
+                        'nome': _departamentosController.text,
+                        'tipo': _tipoDeEventoController.text
+                      });
                       Evento newEvento = Evento(
                           tipoDeEvento: _tipoDeEventoController.text,
                           dia: _diaController.text,
@@ -124,17 +135,17 @@ class _FormEventoState extends State<FormEvento> {
                           times: _timesController.text,
                           funcionarios: _funcionariosController.text,
                           imagemUrl: _imagemController.text);
-                      if (evento != null) {
+                      /*if (evento != null) {
                         service.editEvento(evento.id.toString(), newEvento);
                       } else {
                         service.addEvento(newEvento);
-                      }
+                      }*/
 
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Home()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EventsPage()));
                     },
                     color: Colors.redAccent,
-                    child: Text(evento != null ? "Salvar" : "Cadastrar",
+                    child: Text("Cadastar Evento",
                         style: TextStyle(color: Colors.white, fontSize: 16)),
                   ),
                 ))

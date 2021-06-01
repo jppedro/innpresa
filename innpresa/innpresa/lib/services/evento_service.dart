@@ -1,5 +1,4 @@
-import 'package:pet_pipoca/models/pet_model.dart';
-import 'package:pet_pipoca/utils/db_util.dart';
+/*import 'package:innpresa/models/evento_model.dart';
 
 class EventoService {
   List<Evento> _petList = [];
@@ -84,4 +83,4 @@ class EventoService {
   Evento getEventoService(String id) {
     return _petList.singleWhere((pet) => pet.id == id);
   }
-}
+}*/

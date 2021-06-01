@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:innpresa/categories/category.dart';
 import 'package:innpresa/categories/category_widget.dart';
 import 'package:innpresa/events_page/events_page_background.dart';
+import 'package:innpresa/form_cadastro_evento/form_evento_screen.dart';
 import 'package:innpresa/tiles/event_tile.dart';
 
 class EventsPage extends StatefulWidget {
@@ -17,7 +18,10 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => FormEvento()));
+        },
         child: Icon(Icons.add_rounded, size: 30),
         backgroundColor: Color(0xff29404E),
       ),
