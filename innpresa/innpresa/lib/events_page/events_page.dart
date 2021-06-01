@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:innpresa/app_state.dart';
 import 'package:innpresa/categories/category.dart';
 import 'package:innpresa/categories/category_widget.dart';
 import 'package:innpresa/events_page/events_page_background.dart';

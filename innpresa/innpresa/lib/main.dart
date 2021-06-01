@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:innpresa/events_page/events_page.dart';
+import 'package:innpresa/login/login_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: EventsPage(),
+      home: LoginPage(),
     );
   }
 }
