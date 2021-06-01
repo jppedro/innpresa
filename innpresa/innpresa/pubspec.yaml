@@ -32,7 +32,6 @@ dependencies:
   cupertino_icons: ^1.0.0
   firebase_auth: ^0.11.1+12
   cloud_firestore: ^0.12.9
-  provider: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +65,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: SFUIText
+    - family: SF UI Text
       fonts:
         - asset: assets/fonts/SFUIText/SFUIText-Regular.ttf
         - asset: assets/fonts/SFUIText/SFUIText-Bold.ttf
