@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:innpresa/events_page/events_page.dart';
-import 'package:innpresa/models/evento_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FormEvento extends StatefulWidget {
@@ -17,38 +16,10 @@ class _FormEventoState extends State<FormEvento> {
   final _diaController = TextEditingController();
   final _horaController = TextEditingController();
   final _localController = TextEditingController();
-  final _departamentosController = TextEditingController();
+  final _nomeController = TextEditingController();
   final _funcionariosController = TextEditingController();
   final _timesController = TextEditingController();
   final _imagemController = TextEditingController();
-
-  /*EventoService service = new EventoService();
-
-  Evento evento;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.id != null) {
-      _getEvento(widget.id);
-    }
-
-    if (evento != null) {
-      _tipoDeEventoController.text = evento.tipoDeEvento;
-      _diaController.text = evento.dia;
-      _horaController.text = evento.hora;
-      _localController = evento.local;
-      _funcionariosController = evento.funcionarios;
-      _departamentosController = evento.departamentos;
-      _timesController = evento.times;
-      _imagemController.text = evento.imagemUrl;
-    }
-  }
-
-  void _getEvento(String id) {
-    evento = service.getEventoService(id);
-    print(evento.tipoDeEvento);
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +66,9 @@ class _FormEventoState extends State<FormEvento> {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: "Local")),
             TextFormField(
-                controller: _departamentosController,
+                controller: _nomeController,
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(labelText: "Departamentos")),
+                decoration: InputDecoration(labelText: "Nome")),
             TextFormField(
                 controller: _timesController,
                 keyboardType: TextInputType.text,
@@ -123,23 +94,9 @@ class _FormEventoState extends State<FormEvento> {
                         'idOrganizador': 1,
                         'image': _imagemController.text,
                         'local': _localController.text,
-                        'nome': _departamentosController.text,
+                        'nome': _nomeController.text,
                         'tipo': _tipoDeEventoController.text
                       });
-                      Evento newEvento = Evento(
-                          tipoDeEvento: _tipoDeEventoController.text,
-                          dia: _diaController.text,
-                          hora: _horaController.text,
-                          local: _localController.text,
-                          departamentos: _departamentosController.text,
-                          times: _timesController.text,
-                          funcionarios: _funcionariosController.text,
-                          imagemUrl: _imagemController.text);
-                      /*if (evento != null) {
-                        service.editEvento(evento.id.toString(), newEvento);
-                      } else {
-                        service.addEvento(newEvento);
-                      }*/
 
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => EventsPage()));
