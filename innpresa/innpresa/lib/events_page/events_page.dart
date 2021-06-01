@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:innpresa/categories/category.dart';
@@ -12,6 +13,16 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
+  @override
+  void initState() {
+    super.initState();
+    Firebase.initializeApp().whenComplete(() {
+      setState(() {
+        build(context);
+      });
+    });
+  }
+
   int idSelected = 0;
   String title;
   @override
@@ -90,9 +101,9 @@ class _EventsPageState extends State<EventsPage> {
                     height: 25,
                   ),
                   FutureBuilder<QuerySnapshot>(
-                      future: Firestore.instance
+                      future: FirebaseFirestore.instance
                           .collection("eventos")
-                          .getDocuments(),
+                          .get(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData)
                           return Center(
@@ -101,13 +112,13 @@ class _EventsPageState extends State<EventsPage> {
                         else
                           return Column(
                               children: List.generate(
-                                  snapshot.data.documents.length,
+                                  snapshot.data.docs.length,
                                   (index) => Padding(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 20.0),
                                         child: EventTile(
                                             snapshot:
-                                                snapshot.data.documents[index]),
+                                                snapshot.data.docs[index]),
                                       )));
                       }),
                 ],

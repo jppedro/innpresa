@@ -20,7 +20,7 @@ class EventDetailsContent extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2),
             child: Text(
-              snapshot.data["nome"],
+              snapshot.get("nome"),
               style: TextStyle(
                   fontSize: 38.0,
                   fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class EventDetailsContent extends StatelessWidget {
                   SizedBox(
                     width: 5,
                   ),
-                  Text(snapshot.data["local"],
+                  Text(snapshot.get("local"),
                       style: TextStyle(
                         fontSize: 16.0,
                         color: Colors.white,

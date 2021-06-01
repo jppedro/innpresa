@@ -33,7 +33,7 @@ class EventTile extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                child: Image.network(snapshot.data["image"]),
+                child: Image.network(snapshot.get("image")),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 8.0, left: 8.0),
@@ -45,7 +45,7 @@ class EventTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            snapshot.data["nome"],
+                            snapshot.get("nome"),
                             style: TextStyle(
                                 fontSize: 24.0,
                                 fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class EventTile extends StatelessWidget {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                Text(snapshot.data["local"],
+                                Text(snapshot.get("local"),
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(0xFF000000),
@@ -80,7 +80,7 @@ class EventTile extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(snapshot.data["dia"],
+                          Text(snapshot.get("dia"),
                               style: TextStyle(
                                   fontSize: 16.0,
                                   color: Color(0xFF000000),
@@ -92,7 +92,7 @@ class EventTile extends StatelessWidget {
                             children: [
                               Icon(Icons.watch_later_outlined, size: 20),
                               Text(
-                                snapshot.data["hora"],
+                                snapshot.get("hora"),
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                     fontSize: 16.0,

@@ -152,10 +152,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         new GestureDetector(
                             onTap: () async {
-                              UserCredential userCredential = await FirebaseAuth
+                              /*UserCredential userCredential = await FirebaseAuth
                                   .instance
                                   .signInWithEmailAndPassword(
-                                      email: user, password: password);
+                                      email: user, password: password);*/
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

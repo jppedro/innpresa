@@ -13,7 +13,7 @@ class EventDetailsPage extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          EventDetailsBackground(snapshot.data["image"]),
+          EventDetailsBackground(snapshot.get("image")),
           EventDetailsContent(snapshot: snapshot),
         ],
       ),

@@ -88,7 +88,7 @@ class _FormEventoState extends State<FormEvento> {
                   width: double.infinity,
                   child: RaisedButton(
                     onPressed: () {
-                      Firestore.instance.collection("eventos").add({
+                      FirebaseFirestore.instance.collection("eventos").add({
                         'dia': _diaController.text,
                         'hora': _horaController.text,
                         'idOrganizador': 1,
