@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 /*import 'package:innpresa/models/evento_model.dart';
+=======
+import 'package:innpresa/models/evento_model.dart';
+import 'package:innpresa/utils/db_util.dart';
+>>>>>>> 6ee9e84dcbbbb598db9d03b16ee79c9456772b02
 
 class EventoService {
   List<Evento> _petList = [];
