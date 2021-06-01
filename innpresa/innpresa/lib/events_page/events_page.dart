@@ -5,7 +5,6 @@ import 'package:innpresa/categories/category.dart';
 import 'package:innpresa/categories/category_widget.dart';
 import 'package:innpresa/events_page/events_page_background.dart';
 import 'package:innpresa/tiles/event_tile.dart';
-import 'package:provider/provider.dart';
 
 class EventsPage extends StatefulWidget {
   @override
@@ -23,11 +22,7 @@ class _EventsPageState extends State<EventsPage> {
         child: Icon(Icons.add_rounded, size: 30),
         backgroundColor: Color(0xff29404E),
       ),
-      body:
-          /*ChangeNotifierProvider<AppState>(
-        create: (_) => AppState(),
-        child: */
-          Stack(
+      body: Stack(
         children: [
           EventsPageBackground(
             screenHeight: MediaQuery.of(context).size.height,
@@ -70,8 +65,6 @@ class _EventsPageState extends State<EventsPage> {
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(0.0, 24.0, 10.0, 12.0),
-                    /*child: Consumer<AppState>(
-                              builder: (context, appState, _) =>*/
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -90,10 +83,6 @@ class _EventsPageState extends State<EventsPage> {
                       ],
                     ),
                   ),
-                  /*Consumer<AppState>(
-                          builder: (context, appState, _) => */
-                  //Column(
-                  //children: [
                   SizedBox(
                     height: 25,
                   ),
@@ -118,8 +107,6 @@ class _EventsPageState extends State<EventsPage> {
                                                 snapshot.data.documents[index]),
                                       )));
                       }),
-                  //],
-                  //),
                 ],
               ),
             ),
@@ -129,16 +116,3 @@ class _EventsPageState extends State<EventsPage> {
     );
   }
 }
-/*else
-                          return ListView(
-                            children: [
-                              ListView.builder(
-                                  padding: EdgeInsets.all(4.0),
-                                  itemCount: snapshot.data.documents.length,
-                                  itemBuilder: (context, index) {
-                                    return EventTile(
-                                        snapshot:
-                                            snapshot.data.documents[index]);
-                                  }),
-                            ],
-                          );*/

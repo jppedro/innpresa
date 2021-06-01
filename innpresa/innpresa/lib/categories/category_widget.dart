@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:innpresa/categories/category.dart';
 import 'package:innpresa/style/styleguide.dart';
-import 'package:provider/provider.dart';
-
-import '../app_state.dart';
 
 class CategoryWidget extends StatefulWidget {
   final Category category;
@@ -18,8 +15,6 @@ class CategoryWidget extends StatefulWidget {
 class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
-    //final appState = Provider.of<AppState>(context);
-
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8),
       width: 95,
