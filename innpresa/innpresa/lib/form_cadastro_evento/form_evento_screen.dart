@@ -48,11 +48,13 @@ class _FormEventoState extends State<FormEvento> {
             TextFormField(
                 controller: _tipoDeEventoController,
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(labelText: "Tipo de evento")),
+                decoration: InputDecoration(
+                    labelText: "Tipo de evento", border: OutlineInputBorder())),
             TextFormField(
                 controller: _diaController,
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(labelText: "Dia")),
+                decoration: InputDecoration(
+                    labelText: "Dia", border: OutlineInputBorder())),
             // DropdownButtonFormField<String>(
             //     //value: racaEvento,
             //     decoration: InputDecoration(labelText: "Selecione a raça"),
@@ -75,15 +77,19 @@ class _FormEventoState extends State<FormEvento> {
             TextFormField(
                 controller: _horaController,
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(labelText: "Hora")),
+                decoration: InputDecoration(
+                    labelText: "Hora", border: OutlineInputBorder())),
             TextFormField(
                 controller: _localController,
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(labelText: "Local")),
+                decoration: InputDecoration(
+                    labelText: "Local", border: OutlineInputBorder())),
             TextFormField(
-                controller: _nomeController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(labelText: "Nome")),
+              controller: _nomeController,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                  labelText: "Nome", border: OutlineInputBorder()),
+            ),
             /*StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("funcionarios")
@@ -116,7 +122,8 @@ class _FormEventoState extends State<FormEvento> {
             TextFormField(
                 controller: _imagemController,
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(labelText: "Imagem")),
+                decoration: InputDecoration(
+                    labelText: "Imagem", border: OutlineInputBorder())),
             SizedBox(
               height: 10,
             ),
