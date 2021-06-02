@@ -36,7 +36,7 @@ class _EventsPageState extends State<EventsPage> {
               .push(MaterialPageRoute(builder: (context) => FormEvento()));
         },
         child: Icon(Icons.add_rounded, size: 30),
-        backgroundColor: Color(0xff29404E),
+        backgroundColor: Color.fromRGBO(143, 148, 251, 1),
       ),
       body: Stack(
         children: [
@@ -56,13 +56,13 @@ class _EventsPageState extends State<EventsPage> {
                           "Inn",
                           style: TextStyle(
                               fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w700,
                               color: Colors.amber),
                         ),
                         Text("Presa",
                             style: TextStyle(
                               fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w700,
                               color: Colors.white,
                             )),
                         Spacer(),
@@ -82,7 +82,7 @@ class _EventsPageState extends State<EventsPage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 32.0),
+                    padding: EdgeInsets.only(left: 30.0),
                     child: Text("Eventos",
                         style: TextStyle(
                             fontSize: 40.0,

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 final TextStyle categoryTextStyle = TextStyle(
   fontSize: 14.0,
   fontWeight: FontWeight.bold,
-  color: Color(0xFFFFFFFF),
+  color: Colors.white,
 );
 
 final TextStyle selectedCategoryTextStyle = categoryTextStyle.copyWith(
-  color: Color(0xff29404E),
+  color: Color.fromRGBO(143, 148, 251, 1),
 );

@@ -13,6 +13,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   String email;
   String password;
 
@@ -119,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                                   validator: (text) {
                                     if (text.isEmpty) return "Usuário inválido";
                                   },
-                                  onSaved: (newValue) => email = newValue,
+                                  controller: _emailController,
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "Email",
@@ -137,7 +139,8 @@ class _LoginPageState extends State<LoginPage> {
                                   validator: (text) {
                                     if (text.isEmpty) return "Senha inválida";
                                   },
-                                  onSaved: (newValue) => password = newValue,
+                                  controller: _passwordController,
+                                  obscureText: true,
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "Senha",
@@ -152,27 +155,8 @@ class _LoginPageState extends State<LoginPage> {
                           height: 30,
                         ),
                         new GestureDetector(
-                            onTap: () async {
-                              try {
-                                /*UserCredential userCredential =
-                                    await FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                            email: email, password: password);
-                                SharedPreferences preferences =
-                                    await SharedPreferences.getInstance();
-                                preferences.setString(
-                                    "id", userCredential.user.uid.toString());
-                                print("Signed in");*/
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => EventsPage()));
-                              } on FirebaseAuthException catch (e) {
-                                if (e.code == 'user-not-found') {
-                                  print('No user found for that email.');
-                                } else if (e.code == 'wrong-password') {
-                                  print(
-                                      'Wrong password provided for that user.');
-                                }
-                              }
+                            onTap: () {
+                              handleLogin();
                             },
                             child: Container(
                               height: 50,
@@ -200,5 +184,24 @@ class _LoginPageState extends State<LoginPage> {
         ),
       )),
     );
+  }
+
+  void handleLogin() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString("id", userCredential.user.uid.toString());
+      print("Signed in");
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => EventsPage()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
   }
 }

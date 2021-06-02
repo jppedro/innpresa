@@ -32,7 +32,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           Icon(
             this.widget.category.icon,
             color: widget.isSelected
-                ? Theme.of(context).primaryColor
+                ? Color.fromRGBO(143, 148, 251, 1)
                 : Colors.white,
             size: 40,
           ),

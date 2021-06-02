@@ -84,7 +84,7 @@ class EventTile extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16.0,
                                   color: Color(0xFF000000),
-                                  fontWeight: FontWeight.w900)),
+                                  fontWeight: FontWeight.w800)),
                           SizedBox(
                             height: 5,
                           ),
@@ -99,7 +99,7 @@ class EventTile extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     color: Color(0xFF000000),
-                                    fontWeight: FontWeight.w900),
+                                    fontWeight: FontWeight.w800),
                               ),
                             ],
                           ),
