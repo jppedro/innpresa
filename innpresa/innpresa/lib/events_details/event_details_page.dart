@@ -14,7 +14,7 @@ class EventDetailsPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           EventDetailsBackground(snapshot.get("image")),
-          EventDetailsContent(snapshot: snapshot),
+          EventDetailsContent(snapshot),
         ],
       ),
     );

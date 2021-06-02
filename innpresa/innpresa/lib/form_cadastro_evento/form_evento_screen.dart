@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:innpresa/events_details/event_details_background.dart';
+import 'package:innpresa/events_details/event_details_content.dart';
 import 'package:innpresa/events_page/events_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FormEvento extends StatefulWidget {
   String id;
@@ -22,7 +25,21 @@ class _FormEventoState extends State<FormEvento> {
   final _funcionariosController = TextEditingController();
   final _timesController = TextEditingController();
   final _imagemController = TextEditingController();
+
   var users = [];
+  void getId() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      widget.id = preferences.getString("id");
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getId();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +157,7 @@ class _FormEventoState extends State<FormEvento> {
                       FirebaseFirestore.instance.collection("eventos").add({
                         'dia': _diaController.text,
                         'hora': _horaController.text,
-                        'idOrganizador': 1,
+                        'idOrganizador': widget.id,
                         'image': _imagemController.text,
                         'local': _localController.text,
                         'nome': _nomeController.text,

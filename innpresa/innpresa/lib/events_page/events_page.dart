@@ -8,25 +8,32 @@ import 'package:innpresa/events_page/events_page_background.dart';
 import 'package:innpresa/form_cadastro_evento/form_evento_screen.dart';
 import 'package:innpresa/login/login_page.dart';
 import 'package:innpresa/tiles/event_tile.dart';
+import 'package:innpresa/tiles/organizer_event_tile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EventsPage extends StatefulWidget {
+  String id;
   @override
   _EventsPageState createState() => _EventsPageState();
 }
 
 class _EventsPageState extends State<EventsPage> {
-  @override
-  void initState() {
-    super.initState();
-    Firebase.initializeApp().whenComplete(() {
-      setState(() {
-        build(context);
-      });
+  int idSelected = 0;
+  String title;
+  var users = [];
+  void getId() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      widget.id = preferences.getString("id");
     });
   }
 
-  int idSelected = 0;
-  String title;
+  @override
+  void initState() {
+    super.initState();
+    getId();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,27 +122,7 @@ class _EventsPageState extends State<EventsPage> {
                   SizedBox(
                     height: 25,
                   ),
-                  FutureBuilder<QuerySnapshot>(
-                      future: FirebaseFirestore.instance
-                          .collection("eventos")
-                          .get(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData)
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        else
-                          return Column(
-                              children: List.generate(
-                                  snapshot.data.docs.length,
-                                  (index) => Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20.0),
-                                        child: EventTile(
-                                            snapshot:
-                                                snapshot.data.docs[index]),
-                                      )));
-                      }),
+                  get_all_events()
                 ],
               ),
             ),
@@ -143,5 +130,49 @@ class _EventsPageState extends State<EventsPage> {
         ],
       ),
     );
+  }
+
+  FutureBuilder<QuerySnapshot> get_all_events() {
+    print(widget.id);
+    if (idSelected == 0) {
+      return FutureBuilder<QuerySnapshot>(
+          future: FirebaseFirestore.instance.collection("eventos").get(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            else
+              return Column(
+                  children: List.generate(
+                      snapshot.data.docs.length,
+                      (index) => Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.0),
+                            child:
+                                EventTile(snapshot: snapshot.data.docs[index]),
+                          )));
+          });
+    } else if (idSelected == 1) {
+      return FutureBuilder<QuerySnapshot>(
+        future: FirebaseFirestore.instance
+            .collection("eventos")
+            .where("idOrganizador", isEqualTo: widget.id)
+            .get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData)
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          else
+            return Column(
+                children: List.generate(
+                    snapshot.data.docs.length,
+                    (index) => Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.0),
+                          child: OrganizerEventTile(snapshot: snapshot.data.docs[index]),
+                        )));
+        },
+      );
+    }
   }
 }

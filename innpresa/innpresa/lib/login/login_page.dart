@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:innpresa/Animation/FadeAnimation.dart';
 import 'package:innpresa/events_page/events_page.dart';

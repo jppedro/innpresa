@@ -4,21 +4,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class EventDetailsContent extends StatefulWidget {
   final DocumentSnapshot snapshot;
-  const EventDetailsContent({Key key, this.snapshot}) : super(key: key);
-
+  EventDetailsContent(this.snapshot);
+  String id;
   @override
-  _EventsDetailContetState createState() => _EventsDetailContetState();
+  _EventDetailsContentState createState() => _EventDetailsContentState();
 }
 
-class _EventsDetailContetState extends State<EventDetailsContent> {
+class _EventDetailsContentState extends State<EventDetailsContent> {
+  String nome;
+  var guesses = [];
+  var guessesImages = [];
   @override
   Widget build(BuildContext context) {
-    String id;
-    String nome;
     void getId() async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       setState(() {
-        id = preferences.getString("id");
+        widget.id = preferences.getString("id");
       });
     }
 
@@ -99,17 +100,18 @@ class _EventsDetailContetState extends State<EventDetailsContent> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ClipOval(
-                      child: Image.network(
-                        "https://pbs.twimg.com/profile_images/1396450345593802752/AVaQ1oQP_400x400.jpg",
-                        width: 90,
-                        height: 90,
-                        fit: BoxFit.cover,
+                  for (final i in guesses)
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: ClipOval(
+                        child: Image.network(
+                          "https://pbs.twimg.com/profile_images/1396450345593802752/AVaQ1oQP_400x400.jpg",
+                          width: 90,
+                          height: 90,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  )
                 ],
               ),
             ),
@@ -290,7 +292,7 @@ class _EventsDetailContetState extends State<EventDetailsContent> {
                           ),
                         ),
                         Text(
-                          widget.snapshot.get(""),
+                          widget.snapshot.get("idOrganizador"),
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
@@ -333,5 +335,27 @@ class _EventsDetailContetState extends State<EventDetailsContent> {
         ),
       )
     ]);
+  }
+
+  String get_organizer_name(id) {
+    print(id);
+    FutureBuilder<DocumentSnapshot>(
+      future:
+          FirebaseFirestore.instance.collection("funcionarios").doc(id).get(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData)
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        else
+          print(nome);
+        return nome = snapshot.data.get("nome");
+      },
+    );
+    return nome;
+  }
+
+  void get_users() {
+    guesses = widget.snapshot.get("funcionarios");
   }
 }
