@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,6 +6,7 @@ import 'package:innpresa/categories/category.dart';
 import 'package:innpresa/categories/category_widget.dart';
 import 'package:innpresa/events_page/events_page_background.dart';
 import 'package:innpresa/form_cadastro_evento/form_evento_screen.dart';
+import 'package:innpresa/login/login_page.dart';
 import 'package:innpresa/tiles/event_tile.dart';
 
 class EventsPage extends StatefulWidget {
@@ -51,17 +53,30 @@ class _EventsPageState extends State<EventsPage> {
                     child: Row(
                       children: [
                         Text(
-                          "InnPresa",
+                          "Inn",
                           style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
-                              color: Colors.white),
+                              color: Colors.amber),
                         ),
+                        Text("Presa",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            )),
                         Spacer(),
-                        Icon(
-                          Icons.person_outline,
-                          color: Colors.white60,
-                          size: 30,
+                        InkWell(
+                          onTap: () async {
+                            await FirebaseAuth.instance.signOut();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => LoginPage()));
+                          },
+                          child: Icon(
+                            Icons.exit_to_app_rounded,
+                            color: Colors.white60,
+                            size: 30,
+                          ),
                         )
                       ],
                     ),

@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff29404E),
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.blue,
+        fontFamily: 'SF UI Text',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,

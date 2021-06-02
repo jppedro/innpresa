@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:innpresa/Animation/FadeAnimation.dart';
 import 'package:innpresa/events_page/events_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -12,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  String user;
+  String email;
   String password;
 
   @override
@@ -118,10 +119,10 @@ class _LoginPageState extends State<LoginPage> {
                                   validator: (text) {
                                     if (text.isEmpty) return "Usuário inválido";
                                   },
-                                  onSaved: (newValue) => user = newValue,
+                                  onSaved: (newValue) => email = newValue,
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: "Nome usuario",
+                                      hintText: "Email",
                                       hintStyle:
                                           TextStyle(color: Colors.grey[400])),
                                 ),
@@ -152,18 +153,26 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         new GestureDetector(
                             onTap: () async {
-                              /*UserCredential userCredential = await FirebaseAuth
-                                  .instance
-                                  .signInWithEmailAndPassword(
-                                      email: user, password: password);*/
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return EventsPage();
-                                  },
-                                ),
-                              );
+                              try {
+                                /*UserCredential userCredential =
+                                    await FirebaseAuth.instance
+                                        .signInWithEmailAndPassword(
+                                            email: email, password: password);
+                                SharedPreferences preferences =
+                                    await SharedPreferences.getInstance();
+                                preferences.setString(
+                                    "id", userCredential.user.uid.toString());
+                                print("Signed in");*/
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => EventsPage()));
+                              } on FirebaseAuthException catch (e) {
+                                if (e.code == 'user-not-found') {
+                                  print('No user found for that email.');
+                                } else if (e.code == 'wrong-password') {
+                                  print(
+                                      'Wrong password provided for that user.');
+                                }
+                              }
                             },
                             child: Container(
                               height: 50,
@@ -175,8 +184,9 @@ class _LoginPageState extends State<LoginPage> {
                                   ])),
                               child: Center(
                                 child: Text(
-                                  "Login",
+                                  "Entrar",
                                   style: TextStyle(
+                                      fontSize: 18.0,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),

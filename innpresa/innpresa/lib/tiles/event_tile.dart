@@ -75,10 +75,10 @@ class EventTile extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
+                    Padding(
+                      padding: EdgeInsets.only(top: 15, right: 8),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(snapshot.get("dia"),
                               style: TextStyle(
@@ -89,8 +89,10 @@ class EventTile extends StatelessWidget {
                             height: 5,
                           ),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Icon(Icons.watch_later_outlined, size: 20),
+                              SizedBox(width: 3),
                               Text(
                                 snapshot.get("hora"),
                                 textAlign: TextAlign.right,
