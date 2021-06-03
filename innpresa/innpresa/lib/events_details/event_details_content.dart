@@ -13,7 +13,6 @@ class EventDetailsContent extends StatefulWidget {
 class _EventDetailsContentState extends State<EventDetailsContent> {
   String nome;
   var guesses = [];
-  var guessesImages = [];
   @override
   Widget build(BuildContext context) {
     void getId() async {
@@ -26,7 +25,6 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
     @override
     void initState() {
       super.initState();
-
       getId();
     }
 
@@ -99,21 +97,34 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  for (final i in guesses)
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: ClipOval(
+                  children: List.generate(
+                      widget.snapshot.get("funcionarios").length,
+                      (index) => Padding(
+                            padding: EdgeInsets.only(top: 10.0, left: 8),
+                            child: ClipOval(
+                              child: Image.network(
+                                widget.snapshot.get("funcionarios")[index],
+                                width: 90,
+                                height: 90,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ))
+                  /*ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: images.length,
+                    itemBuilder: (context, index) {
+                      return ClipOval(
                         child: Image.network(
-                          "https://pbs.twimg.com/profile_images/1396450345593802752/AVaQ1oQP_400x400.jpg",
+                          images[index],
                           width: 90,
                           height: 90,
                           fit: BoxFit.cover,
                         ),
-                      ),
-                    ),
-                ],
-              ),
+                      );
+                    },
+                  ),*/
+                  ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 5.0, top: 20),
@@ -292,7 +303,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                           ),
                         ),
                         Text(
-                          widget.snapshot.get("idOrganizador"),
+                          widget.snapshot.get("nomeOrganizador"),
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
@@ -337,7 +348,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
     ]);
   }
 
-  String get_organizer_name(id) {
+  /*String get_organizer_name(id) {
     print(id);
     FutureBuilder<DocumentSnapshot>(
       future:
@@ -353,9 +364,69 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
       },
     );
     return nome;
-  }
+  }*/
 
-  void get_users() {
+  String get_organizer_name() {}
+
+  /*void get_users_images() async {
+    print("ENTROUAAAAAAAAAAAAAAAAAA");
+    DocumentSnapshot userSnapshot;
+    var image;
     guesses = widget.snapshot.get("funcionarios");
-  }
+    for (int i = 0; i < guesses.length; i++) {
+      userSnapshot = await FirebaseFirestore.instance
+          .collection("funcionarios")
+          .doc(guesses[i])
+          .get()
+          .then((value) {
+        image = userSnapshot.get("image");
+        images.add(image);
+      });
+      print(images[0].toString());
+    }*/
+
+  /*return SingleChildScrollView(
+        child: Row(
+      children: [
+        for (var i in guesses)
+          FutureBuilder(
+            future: FirebaseFirestore.instance
+                .collection("funcionarios")
+                .doc(i)
+                .get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData)
+                Center(
+                  child: CircularProgressIndicator(),
+                );
+              else
+                ClipOval(
+                  child: Image.network(
+                    get_image_link(snapshot),
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.cover,
+                  ),
+                );
+            },
+          )
+      ],
+    ));*/
 }
+/*SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: ClipOval(
+                        child: Image.network(
+                          "https://pbs.twimg.com/profile_images/1396450345593802752/AVaQ1oQP_400x400.jpg",
+                          width: 90,
+                          height: 90,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                ],
+              ),*/

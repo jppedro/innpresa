@@ -56,9 +56,15 @@ class _EventsPageState extends State<EventsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(32.0, 10.0, 32.0, 0),
+                    padding: EdgeInsets.fromLTRB(25.0, 10.0, 32.0, 0),
                     child: Row(
                       children: [
+                        Image.network(
+                          "https://media.discordapp.net/attachments/830438359444881418/850026969524338758/innPresa_logo.png?width=744&height=558",
+                          height: 35,
+                          width: 35,
+                          fit: BoxFit.cover,
+                        ),
                         Text(
                           "Inn",
                           style: TextStyle(
@@ -84,7 +90,7 @@ class _EventsPageState extends State<EventsPage> {
                             color: Colors.white60,
                             size: 30,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -169,7 +175,8 @@ class _EventsPageState extends State<EventsPage> {
                     snapshot.data.docs.length,
                     (index) => Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: OrganizerEventTile(snapshot: snapshot.data.docs[index]),
+                          child: OrganizerEventTile(
+                              snapshot: snapshot.data.docs[index]),
                         )));
         },
       );

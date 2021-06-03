@@ -23,6 +23,7 @@ class _FormEditarEventoState extends State<FormEditarEvento> {
   TextEditingController _imagemController;
 
   var users = [];
+  String nome;
   void getId() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -56,7 +57,7 @@ class _FormEditarEventoState extends State<FormEditarEvento> {
                 Navigator.pop(context);
               }),
           title: Text(
-            "Cadastro de Evento",
+            "Editar Evento",
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
@@ -171,6 +172,7 @@ class _FormEditarEventoState extends State<FormEditarEvento> {
                         'dia': _diaController.text,
                         'hora': _horaController.text,
                         'idOrganizador': widget.id,
+                        'nomeOrganizador': nome,
                         'image': _imagemController.text,
                         'local': _localController.text,
                         'nome': _nomeController.text,
@@ -205,6 +207,7 @@ class _FormEditarEventoState extends State<FormEditarEvento> {
                 children: List.generate(snapshot.data.docs.length, (index) {
               dynamic person = snapshot.data.docs[index];
               bool _isSelected = false;
+              if (person.id == widget.id) nome = person.data()["nome"];
               return StatefulBuilder(builder: (context, setState) {
                 return CheckboxListTile(
                   title: Container(
@@ -221,9 +224,9 @@ class _FormEditarEventoState extends State<FormEditarEvento> {
                   value: _isSelected,
                   onChanged: (newValue) {
                     if (newValue == true) {
-                      users.add(person.id);
+                      users.add(person.data()["image"]);
                     } else {
-                      users.remove(person.id);
+                      users.remove(person.data()["image"]);
                     }
                     setState(() {
                       _isSelected = newValue;

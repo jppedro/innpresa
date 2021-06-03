@@ -27,6 +27,7 @@ class _FormEventoState extends State<FormEvento> {
   final _imagemController = TextEditingController();
 
   var users = [];
+  String nome;
   void getId() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -61,53 +62,71 @@ class _FormEventoState extends State<FormEvento> {
             child: Padding(
           padding: EdgeInsets.all(10),
           child: Form(
-              child: Column(children: <Widget>[
-            TextFormField(
-                controller: _tipoDeEventoController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    labelText: "Tipo de evento", border: OutlineInputBorder())),
-            TextFormField(
-                controller: _diaController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    labelText: "Dia", border: OutlineInputBorder())),
-            // DropdownButtonFormField<String>(
-            //     //value: racaEvento,
-            //     decoration: InputDecoration(labelText: "Selecione a raça"),
-            //     onChanged: (String racaSelecionada) {
-            //       setState(() {
-            //         racaEvento = racaSelecionada;
-            //         print(racaEvento);
-            //       });
-            //     },
-            //     items: <String>[
-            //       'York Shire',
-            //       'Pastor Alemão',
-            //       'Pinscher',
-            //       'Schnauzer'
-            //     ]
-            //         .map(
-            //           (e) => DropdownMenuItem(value: e, child: Text(e)),
-            //         )
-            //         .toList()),
-            TextFormField(
-                controller: _horaController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    labelText: "Hora", border: OutlineInputBorder())),
-            TextFormField(
-                controller: _localController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    labelText: "Local", border: OutlineInputBorder())),
-            TextFormField(
-              controller: _nomeController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  labelText: "Nome", border: OutlineInputBorder()),
-            ),
-            /*StreamBuilder<QuerySnapshot>(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TextFormField(
+                      controller: _tipoDeEventoController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          labelText: "Tipo de evento",
+                          border: OutlineInputBorder())),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TextFormField(
+                      controller: _diaController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          labelText: "Dia", border: OutlineInputBorder())),
+                ),
+                // DropdownButtonFormField<String>(
+                //     //value: racaEvento,
+                //     decoration: InputDecoration(labelText: "Selecione a raça"),
+                //     onChanged: (String racaSelecionada) {
+                //       setState(() {
+                //         racaEvento = racaSelecionada;
+                //         print(racaEvento);
+                //       });
+                //     },
+                //     items: <String>[
+                //       'York Shire',
+                //       'Pastor Alemão',
+                //       'Pinscher',
+                //       'Schnauzer'
+                //     ]
+                //         .map(
+                //           (e) => DropdownMenuItem(value: e, child: Text(e)),
+                //         )
+                //         .toList()),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TextFormField(
+                      controller: _horaController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          labelText: "Hora", border: OutlineInputBorder())),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TextFormField(
+                      controller: _localController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          labelText: "Local", border: OutlineInputBorder())),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _nomeController,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        labelText: "Nome", border: OutlineInputBorder()),
+                  ),
+                ),
+                /*StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("funcionarios")
                     .snapshots(),
@@ -131,49 +150,64 @@ class _FormEventoState extends State<FormEvento> {
                     ),
                   );
                 }),*/
-            get_all_funcs(),
-            /*TextFormField(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Selecione os participantes do evento: ",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: get_all_funcs(),
+                ),
+                /*TextFormField(
                 controller: _funcionariosController,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: "Funcionarios")),*/
-            TextFormField(
-                controller: _imagemController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    labelText: "Imagem", border: OutlineInputBorder())),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  height: 60,
-                  width: double.infinity,
-                  child: RaisedButton(
-                    onPressed: () {
-                      FirebaseFirestore.instance.collection("eventos").add({
-                        'dia': _diaController.text,
-                        'hora': _horaController.text,
-                        'idOrganizador': widget.id,
-                        'image': _imagemController.text,
-                        'local': _localController.text,
-                        'nome': _nomeController.text,
-                        'funcionarios': users,
-                        'tipo': _tipoDeEventoController.text
-                      });
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                      controller: _imagemController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          labelText: "Imagem", border: OutlineInputBorder())),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                    padding: EdgeInsets.only(top: 20, bottom: 20),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      height: 60,
+                      width: double.infinity,
+                      child: RaisedButton(
+                        onPressed: () {
+                          FirebaseFirestore.instance.collection("eventos").add({
+                            'dia': _diaController.text,
+                            'hora': _horaController.text,
+                            'idOrganizador': widget.id,
+                            'nomeOrganizador': nome,
+                            'image': _imagemController.text,
+                            'local': _localController.text,
+                            'nome': _nomeController.text,
+                            'funcionarios': users,
+                            'tipo': _tipoDeEventoController.text
+                          });
 
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => EventsPage()));
-                    },
-                    color: Color.fromRGBO(143, 148, 251, 1),
-                    child: Text("Cadastar Evento",
-                        style: TextStyle(color: Colors.white, fontSize: 16)),
-                  ),
-                ))
-          ])),
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => EventsPage()));
+                        },
+                        color: Color.fromRGBO(143, 148, 251, 1),
+                        child: Text("Cadastrar Evento",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 16)),
+                      ),
+                    ))
+              ])),
         )));
   }
 
@@ -192,6 +226,7 @@ class _FormEventoState extends State<FormEvento> {
                 children: List.generate(snapshot.data.docs.length, (index) {
               dynamic person = snapshot.data.docs[index];
               bool _isSelected = false;
+              if (person.id == widget.id) nome = person.data()["nome"];
               return StatefulBuilder(builder: (context, setState) {
                 return CheckboxListTile(
                   title: Container(
@@ -208,9 +243,9 @@ class _FormEventoState extends State<FormEvento> {
                   value: _isSelected,
                   onChanged: (newValue) {
                     if (newValue == true) {
-                      users.add(person.id);
+                      users.add(person.data()["image"]);
                     } else {
-                      users.remove(person.id);
+                      users.remove(person.data()["image"]);
                     }
                     setState(() {
                       _isSelected = newValue;
