@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:innpresa/events_details/event_details_page.dart';
+import 'package:innpresa/form_editar_evento/form_editar_screen.dart';
 
 class OrganizerEventTile extends StatefulWidget {
   final DocumentSnapshot snapshot;
@@ -117,7 +118,12 @@ class _OrganizerEventTileState extends State<OrganizerEventTile> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RawMaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => FormEditarEvento(
+                                  widget.snapshot,
+                                )));
+                      },
                       elevation: 1.0,
                       fillColor: Color.fromRGBO(143, 148, 251, 1),
                       child: Icon(

@@ -244,7 +244,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.note_alt_outlined, size: 40),
+                  Icon(Icons.description_outlined, size: 40),
                   Padding(
                     padding: EdgeInsets.only(left: 8.0),
                     child: Column(
